@@ -156,6 +156,5 @@
 
     angular
         .module('tooltips', [])
-        .directive('tooltipTitle', directive)
-        .directive('tooltip', directive);
+        .directive('tooltipTitle', directive);
 })();
