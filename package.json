@@ -9,7 +9,7 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git://github.com/Intellipharm/angular-tooltips.git"
+    "url": "git://github.com/nkiriz/angular-tooltips.git"
   },
   "devDependencies": {
     "del": "^2.2.0",
