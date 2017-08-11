@@ -130,7 +130,7 @@
                             };
                         case 'top-left':
                             return {
-                                left: elBounding.left - tooltipBounding.width + arrow_padding + scrollLeft + 'px',
+                                left: elBounding.left + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
                     }

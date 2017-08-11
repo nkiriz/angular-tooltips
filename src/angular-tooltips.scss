@@ -253,7 +253,7 @@ $after-width: 5px;
         &:before,
         &:after {
             top: 100%;
-            left: calc(100% - #{$before-width});
+            left: 10%;
         }
 
         &:before {
