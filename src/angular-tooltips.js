@@ -5,12 +5,12 @@
         return {
             restrict: 'A',
             scope: {
-                title: '@'
+                tooltipTitle: '@'
             },
             link: function ($scope, element, attrs) {
                 // adds the tooltip to the body
                 $scope.createTooltip = function (event) {
-                    if (attrs.title || attrs.tooltip) {
+                    if (attrs.tooltipTitle || attrs.tooltip) {
                         var direction = $scope.getDirection();
 
                         // create the tooltip
@@ -20,31 +20,25 @@
                         // append to the body
                         angular.element(document).find('body').append($scope.tooltipElement);
 
-                        $scope.updateTooltip(attrs.title || attrs.tooltip);
+                        $scope.updateTooltip(attrs.tooltipTitle || attrs.tooltip);
 
                         // fade in
                         $scope.tooltipElement.addClass('angular-tooltip-fade-in');
                     }
                 };
 
-                $scope.updateTooltip = function(title) {
-                    $scope.tooltipElement.html(title);
+                $scope.updateTooltip = function(tooltipTitle) {
+                    $scope.tooltipElement.html(tooltipTitle);
 
                     $compile($scope.tooltipElement.contents())($scope);
 
                     var css = $scope.calculatePosition($scope.tooltipElement, $scope.getDirection());
                     $scope.tooltipElement.css(css);
-
-                    // stop the standard tooltip from being shown
-                    $timeout(function () {
-                        element.removeAttr('ng-attr-title');
-                        element.removeAttr('title');
-                    });
                 };
 
-                $scope.$watch('title', function(newTitle) {
+                $scope.$watch('tooltipTitle', function(newTooltipTitle) {
                     if ($scope.tooltipElement) {
-                        $scope.updateTooltip(newTitle);
+                        $scope.updateTooltip(newTooltipTitle);
                     }
                 });
 
@@ -60,7 +54,7 @@
 
                 // gets the current direction value
                 $scope.getDirection = function() {
-                    return element.attr('tooltip-direction') || element.attr('title-direction') || 'top';
+                    return element.attr('tooltip-direction') || element.attr('tooltip-title-direction') || 'top';
                 };
 
                 $scope.calculatePosition = function(tooltip, direction) {
@@ -142,7 +136,7 @@
                     }
                 };
 
-                if (attrs.title || attrs.tooltip) {
+                if (attrs.tooltipTitle || attrs.tooltip) {
                     // attach events to show tooltip
                     element.on('mouseover', $scope.createTooltip);
                     element.on('mouseout', $scope.removeTooltip);
@@ -162,6 +156,6 @@
 
     angular
         .module('tooltips', [])
-        .directive('title', directive)
+        .directive('tooltipTitle', directive)
         .directive('tooltip', directive);
 })();

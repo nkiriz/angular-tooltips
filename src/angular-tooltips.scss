@@ -1,5 +1,5 @@
-$background: #000000;
-$border: #000000;
+$background: #2b2b2b;
+$border: #2b2b2b;
 $color: #FFFFFF;
 $before-width: 8px;
 $after-width: 5px;
@@ -10,14 +10,13 @@ $after-width: 5px;
 
     position: absolute;
     background: $background;
+    font-size: 12px;
     z-index: 9999;
-    padding: 3px;
-    border: 2px solid $border;
+    padding: 10px 16px;
     color: $color;
     pointer-events: none;
     user-select: none;
     max-width: 250px;
-    border-radius: 3px;
 
     &.angular-tooltip-fade-in {
         // opacity: 1;
@@ -54,12 +53,10 @@ $after-width: 5px;
 
         &:before {
             margin-left: -$before-width;
-            border-top-color: $border;
         }
 
         &:after {
             margin-left: -$after-width;
-            border-top-color: $background;
         }
     }
 
@@ -72,12 +69,10 @@ $after-width: 5px;
 
         &:before {
             margin-right: -$before-width;
-            border-top-color: $border;
         }
 
         &:after {
             margin-right: -$after-width;
-            border-top-color: $background;
         }
     }
 
@@ -90,12 +85,10 @@ $after-width: 5px;
 
         &:before {
             margin-top: -$before-width;
-            border-right-color: $border;
         }
 
         &:after {
             margin-top: -$after-width;
-            border-right-color: $background;
         }
     }
 
@@ -110,12 +103,10 @@ $after-width: 5px;
 
         &:before {
             margin-top: -$before-width;
-            border-right-color: $border;
         }
 
         &:after {
             margin-top: -$after-width;
-            border-right-color: $background;
         }
     }
 
@@ -128,12 +119,10 @@ $after-width: 5px;
 
         &:before {
             margin-bottom: -$before-width;
-            border-right-color: $border;
         }
 
         &:after {
             margin-bottom: -$after-width;
-            border-right-color: $background;
         }
     }
 
@@ -146,12 +135,10 @@ $after-width: 5px;
 
         &:before {
             margin-right: -$before-width;
-            border-bottom-color: $border;
         }
 
         &:after {
             margin-right: -$after-width;
-            border-bottom-color: $background;
         }
     }
 
@@ -166,12 +153,10 @@ $after-width: 5px;
 
         &:before {
             margin-left: -$before-width;
-            border-bottom-color: $border;
         }
 
         &:after {
             margin-left: -$after-width;
-            border-bottom-color: $background;
         }
     }
 
@@ -184,12 +169,10 @@ $after-width: 5px;
 
         &:before {
             margin-left: -$before-width;
-            border-bottom-color: $border;
         }
 
         &:after {
             margin-left: -$after-width;
-            border-bottom-color: $background;
         }
     }
 
@@ -202,12 +185,10 @@ $after-width: 5px;
 
         &:before {
             margin-bottom: -$before-width;
-            border-left-color: $border;
         }
 
         &:after {
             margin-bottom: -$after-width;
-            border-left-color: $background;
         }
     }
 
@@ -222,12 +203,10 @@ $after-width: 5px;
 
         &:before {
             margin-top: -$before-width;
-            border-left-color: $border;
         }
 
         &:after {
             margin-top: -$after-width;
-            border-left-color: $background;
         }
     }
 
@@ -240,12 +219,10 @@ $after-width: 5px;
 
         &:before {
             margin-top: -$before-width;
-            border-left-color: $border;
         }
 
         &:after {
             margin-top: -$after-width;
-            border-left-color: $background;
         }
     }
 
@@ -258,12 +235,10 @@ $after-width: 5px;
 
         &:before {
             margin-left: -$before-width;
-            border-top-color: $border;
         }
 
         &:after {
             margin-left: -$after-width;
-            border-top-color: $background;
         }
     }
 }
