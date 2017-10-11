@@ -5,7 +5,8 @@
         return {
             restrict: 'A',
             scope: {
-                tooltipTitle: '@'
+                tooltipTitle: '@',
+                showTooltip: "="
             },
             link: function ($scope, element, attrs) {
                 // adds the tooltip to the body
@@ -136,11 +137,11 @@
                     }
                 };
 
-                if (attrs.tooltipTitle || attrs.tooltip) {
+                if ((attrs.tooltipTitle || attrs.tooltip) && $scope.showTooltip)  {
                     // attach events to show tooltip
                     element.on('mouseover', $scope.createTooltip);
                     element.on('mouseout', $scope.removeTooltip);
-                } else {
+                } else if ($scope.showTooltip) {
                     // remove events
                     element.off('mouseover', $scope.createTooltip);
                     element.off('mouseout', $scope.removeTooltip);
