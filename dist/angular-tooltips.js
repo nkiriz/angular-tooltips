@@ -36,6 +36,10 @@
 
                     var css = $scope.calculatePosition($scope.tooltipElement, $scope.getDirection());
                     $scope.tooltipElement.css(css);
+
+                    if ( attrs.fixedWidth ) {
+                        $scope.tooltipElement.css( "width", attrs.fixedWidth );
+                    }
                 };
 
                 $scope.$watch('tooltipTitle', function(newTooltipTitle) {
