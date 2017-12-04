@@ -6,7 +6,8 @@
             restrict: 'A',
             scope: {
                 tooltipTitle: '@',
-                showTooltip: "="
+                showTooltip: "=",
+                setParentCss: "="
             },
             link: function ($scope, element, attrs) {
                 // adds the tooltip to the body
@@ -17,6 +18,11 @@
                         // create the tooltip
                         $scope.tooltipElement = angular.element('<div>')
                         .addClass('angular-tooltip angular-tooltip-' + direction);
+
+                        if ( attrs.fixedWidth ) {
+                            $scope.tooltipElement.css( "max-width", "" );
+                            $scope.tooltipElement.css( "width", attrs.fixedWidth );
+                        }
 
                         // append to the body
                         angular.element(document).find('body').append($scope.tooltipElement);
@@ -60,6 +66,15 @@
 
                 $scope.calculatePosition = function(tooltip, direction) {
                     var tooltipBounding = tooltip[0].getBoundingClientRect();
+                    var parentElBounding;
+                    if ($scope.setParentCss) {
+                        // supporting only 2 parent levels
+                        if (element[0].parentElement.classList.contains('parent-tooltip')) {
+                            parentElBounding = element[0].parentElement.getBoundingClientRect();
+                        } else if (element[0].parentElement.parentElement.classList.contains('parent-tooltip')) {
+                            parentElBounding = element[0].parentElement.parentElement.getBoundingClientRect();
+                        }
+                    }
                     var elBounding = element[0].getBoundingClientRect();
                     var scrollLeft = window.scrollX || document.documentElement.scrollLeft;
                     var scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -70,68 +85,92 @@
                         case 'top-center':
                         case 'top-middle':
                             return {
-                                left: elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + (parentElBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px'
+                                :  elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
                         case 'top-right':
                             return {
-                                left: elBounding.left + elBounding.width - arrow_padding + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + parentElBounding.width - arrow_padding + scrollLeft + 'px'
+                                : elBounding.left + elBounding.width - arrow_padding + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
                         case 'right-top':
                             return {
-                                left: elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + parentElBounding.width + (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height + arrow_padding + scrollTop + 'px',
                             };
                         case 'right':
                         case 'right-center':
                         case 'right-middle':
                             return {
-                                left: elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + parentElBounding.width + (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top + (elBounding.height / 2) - (tooltipBounding.height / 2) + scrollTop + 'px',
                             };
                         case 'right-bottom':
                             return {
-                                left: elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + parentElBounding.width + (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left + elBounding.width + (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top + elBounding.height - arrow_padding + scrollTop + 'px',
                             };
                         case 'bottom-right':
                             return {
-                                left: elBounding.left + elBounding.width - arrow_padding + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + parentElBounding.width - arrow_padding + scrollLeft + 'px'
+                                : elBounding.left + elBounding.width - arrow_padding + scrollLeft + 'px',
                                 top: elBounding.top + elBounding.height + (arrow_padding / 2) + scrollTop + 'px',
                             };
                         case 'bottom':
                         case 'bottom-center':
                         case 'bottom-middle':
                             return {
-                                left: elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + (parentElBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px'
+                                : elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
                                 top: elBounding.top + elBounding.height + (arrow_padding / 2) + scrollTop + 'px',
                             };
                         case 'bottom-left':
                             return {
-                                left: elBounding.left - tooltipBounding.width + arrow_padding + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left - tooltipBounding.width + arrow_padding + scrollLeft + 'px'
+                                : elBounding.left - tooltipBounding.width + arrow_padding + scrollLeft + 'px',
                                 top: elBounding.top + elBounding.height + (arrow_padding / 2) + scrollTop + 'px',
                             };
                         case 'left-bottom':
                             return {
-                                left: elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top + elBounding.height - arrow_padding + scrollTop + 'px',
                             };
                         case 'left':
                         case 'left-center':
                         case 'left-middle':
                             return {
-                                left: elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top + (elBounding.height / 2) - (tooltipBounding.height / 2) + scrollTop + 'px',
                             };
                         case 'left-top':
                             return {
-                                left: elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px'
+                                : elBounding.left - tooltipBounding.width - (arrow_padding / 2) + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height + arrow_padding + scrollTop + 'px',
                             };
                         case 'top-left':
                             return {
-                                left: elBounding.left + 'px',
+                                left: $scope.setParentCss
+                                ? parentElBounding.left + 'px'
+                                : elBounding.left + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
                     }
