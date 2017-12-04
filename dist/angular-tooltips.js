@@ -19,11 +19,6 @@
                         $scope.tooltipElement = angular.element('<div>')
                         .addClass('angular-tooltip angular-tooltip-' + direction);
 
-                        if ( attrs.fixedWidth ) {
-                            $scope.tooltipElement.css( "max-width", "" );
-                            $scope.tooltipElement.css( "width", attrs.fixedWidth );
-                        }
-
                         // append to the body
                         angular.element(document).find('body').append($scope.tooltipElement);
 
@@ -86,7 +81,7 @@
                         case 'top-middle':
                             return {
                                 left: $scope.setParentCss
-                                ? parentElBounding.left + (parentElBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px'
+                                ? parentElBounding.left + 12 + 'px'
                                 :  elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
