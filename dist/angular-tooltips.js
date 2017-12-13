@@ -85,7 +85,7 @@
                         case 'top-middle':
                             return {
                                 left: $scope.setParentCss
-                                ? parentElBounding.left + 12 + 'px'
+                                ? parentElBounding.left + 20 + 'px'
                                 :  elBounding.left + (elBounding.width / 2) - (tooltipBounding.width / 2) + scrollLeft + 'px',
                                 top: elBounding.top - tooltipBounding.height - (arrow_padding / 2) + scrollTop + 'px',
                             };
